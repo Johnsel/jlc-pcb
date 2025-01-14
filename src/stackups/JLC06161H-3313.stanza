@@ -78,7 +78,6 @@ public pcb-routing-structure se-50 (neckdown:Maybe<NeckDown> = None()):
   layer-constraints(Top + 4) = l2_5-se-50-stripline
   layer-constraints(Bottom) = ext-se-50-ustrip
 
-
 public pcb-routing-structure uncoupled-diff-100-def:
   val df-100-ustrip = RoutingStructureLayerConstraints(
     trace-width = 0.1080,
@@ -87,7 +86,7 @@ public pcb-routing-structure uncoupled-diff-100-def:
     insertion-loss = Dk-prepreg
   )
   val df-100-stripline = RoutingStructureLayerConstraints(
-    trace-width = 0.1217,
+    trace-width = 0.1029,
     clearance = 0.15,
     velocity = int-velocity
     insertion-loss = Dk-prepreg
@@ -97,83 +96,42 @@ public pcb-routing-structure uncoupled-diff-100-def:
   layer-constraints(Bottom) = df-100-ustrip
 
   layer-constraints(Top + 1) = df-100-stripline
+  layer-constraints(Top + 3) = df-100-stripline
   layer-constraints(Bottom - 1) = df-100-stripline
-
-  
-public pcb-routing-structure uncoupled-diff-85-def:
-  val df-85-ustrip = RoutingStructureLayerConstraints(
-    trace-width = 0.1722,
-    clearance = 0.15,
-    velocity = ext-velocity
-    insertion-loss = Dk-prepreg
-  )
-  val df-85-stripline = RoutingStructureLayerConstraints(
-    trace-width = 0.1298,
-    clearance = 0.15,
-    velocity = int-velocity
-    insertion-loss = Dk-prepreg
-  )
-
-  layer-constraints(Top) = df-85-ustrip
-  layer-constraints(Bottom) = df-85-ustrip
-
-  layer-constraints(Top + 1) = df-85-stripline
-  layer-constraints(Bottom - 1) = df-85-stripline
 
 public pcb-differential-routing-structure diff-100 (
   uncoupled:Maybe<RoutingStructure> = None()
   neckdown:Maybe<DifferentialNeckDown> = None()
   ):
-  name = "100Ω Differential Pair - CPWG - JLC06161H-3313"
+  name = "100Ω Differential Pair - CPWG - JLC06161H-7628"
 
   make-uncoupled-region(uncoupled-diff-100-def, uncoupled)
 
   ; This expects a ground ref plane on Top + 1
   val df-100-ustrip = DiffRoutingStructureLayerConstraints(
-    trace-width = 0.1080
-    pair-spacing = 0.15
+    trace-width = 0.1057
+    pair-spacing = 0.2
     clearance = 0.3
     velocity = ext-velocity
     insertion-loss = Dk-prepreg
     neck-down = value-or-else(neckdown, {false})
   )
-
-  ; This expects a ground ref plane on Top + 1
-  val df-85-ustrip = DiffRoutingStructureLayerConstraints(
-    trace-width = 0.1610
-    pair-spacing = 0.15
-    clearance = 0.3
-    velocity = ext-velocity
-    insertion-loss = Dk-prepreg
-    neck-down = value-or-else(neckdown, {false})
-  )
-
-  layer-constraints(Top) = [df-100-ustrip, df-85-ustrip]
-  layer-constraints(Bottom) = [df-100-ustrip, df-85-ustrip]
+  layer-constraints(Top) = df-100-ustrip
+  layer-constraints(Bottom) = df-100-ustrip
 
   ; This expects a ground ref plane on Top and Top + 2 (or Bottom and Bottom - 2)
   val df-100-stripline = DiffRoutingStructureLayerConstraints(
-    trace-width = 0.1298
-    pair-spacing = 0.15
-    clearance = 0.3
-    velocity = int-velocity
-    insertion-loss = Dk-prepreg
-    neck-down = value-or-else(neckdown, {false})
-  )
-  
-  ; This expects a ground ref plane on Top and Top + 2 (or Bottom and Bottom - 2)
-  val df-85-stripline = DiffRoutingStructureLayerConstraints(
-    trace-width = 0.1369
-    pair-spacing = 0.15
+    trace-width = 0.1054
+    pair-spacing = 0.2
     clearance = 0.3
     velocity = int-velocity
     insertion-loss = Dk-prepreg
     neck-down = value-or-else(neckdown, {false})
   )
 
-  layer-constraints(Top + 1) = [df-100-stripline, df-85-stripline]
-  layer-constraints(Bottom - 1) = [df-100-stripline, df-85-stripline]
-
+  layer-constraints(Top + 1) = df-100-stripline
+  layer-constraints(Top + 3) = df-100-stripline
+  layer-constraints(Bottom - 1) = df-100-stripline
 
 public pcb-differential-routing-structure diff-85 (
   uncoupled:Maybe<RoutingStructure> = None()
@@ -181,7 +139,7 @@ public pcb-differential-routing-structure diff-85 (
   ):
   name = "85Ω Differential Pair - CPWG - JLC06161H-3313"
 
-  make-uncoupled-region(uncoupled-diff-100-def, uncoupled)
+  make-uncoupled-region(uncoupled-diff-85-def, uncoupled)
 
   ; This expects a ground ref plane on Top + 1
   val df-85-ustrip = DiffRoutingStructureLayerConstraints(
@@ -198,7 +156,7 @@ public pcb-differential-routing-structure diff-85 (
   
   ; This expects a ground ref plane on Top and Top + 2 (or Bottom and Bottom - 2)
   val df-85-stripline = DiffRoutingStructureLayerConstraints(
-    trace-width = 0.1369
+    trace-width = 0.1605
     pair-spacing = 0.15
     clearance = 0.3
     velocity = int-velocity
