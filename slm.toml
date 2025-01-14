@@ -1,5 +1,5 @@
 name = "jlc-pcb"
-version = "0.3.3"
+version = "0.3.4"
 [dependencies]
 maybe-utils = { git = "StanzaOrg/maybe-utils", version = "0.1.6"}
 
