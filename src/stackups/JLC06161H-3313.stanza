@@ -81,13 +81,13 @@ public pcb-routing-structure se-50 (neckdown:Maybe<NeckDown> = None()):
 
 public pcb-routing-structure uncoupled-diff-100-def:
   val df-100-ustrip = RoutingStructureLayerConstraints(
-    trace-width = 0.1722,
+    trace-width = 0.1080,
     clearance = 0.15,
     velocity = ext-velocity
     insertion-loss = Dk-prepreg
   )
   val df-100-stripline = RoutingStructureLayerConstraints(
-    trace-width = 0.1298,
+    trace-width = 0.1217,
     clearance = 0.15,
     velocity = int-velocity
     insertion-loss = Dk-prepreg
@@ -98,6 +98,27 @@ public pcb-routing-structure uncoupled-diff-100-def:
 
   layer-constraints(Top + 1) = df-100-stripline
   layer-constraints(Bottom - 1) = df-100-stripline
+
+  
+public pcb-routing-structure uncoupled-diff-85-def:
+  val df-85-ustrip = RoutingStructureLayerConstraints(
+    trace-width = 0.1722,
+    clearance = 0.15,
+    velocity = ext-velocity
+    insertion-loss = Dk-prepreg
+  )
+  val df-85-stripline = RoutingStructureLayerConstraints(
+    trace-width = 0.1298,
+    clearance = 0.15,
+    velocity = int-velocity
+    insertion-loss = Dk-prepreg
+  )
+
+  layer-constraints(Top) = df-85-ustrip
+  layer-constraints(Bottom) = df-85-ustrip
+
+  layer-constraints(Top + 1) = df-85-stripline
+  layer-constraints(Bottom - 1) = df-85-stripline
 
 public pcb-differential-routing-structure diff-100 (
   uncoupled:Maybe<RoutingStructure> = None()
