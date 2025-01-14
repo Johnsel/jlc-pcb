@@ -103,7 +103,7 @@ public pcb-differential-routing-structure diff-100 (
   uncoupled:Maybe<RoutingStructure> = None()
   neckdown:Maybe<DifferentialNeckDown> = None()
   ):
-  name = "100Ω Differential Pair - CPWG - JLC06161H-7628"
+  name = "100Ω Differential Pair - CPWG - JLC06161H-3313"
 
   make-uncoupled-region(uncoupled-diff-100-def, uncoupled)
 
