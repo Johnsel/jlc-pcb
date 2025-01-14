@@ -8,7 +8,7 @@ defpackage jlc-pcb/stackups/materials:
 
 ; From Impedance Control Specifications from JLC-PCB
 public val Er-7628 = 4.4
-public val Er-3314 = 4.1
+public val Er-3313 = 4.1
 public val Er-1080 = 3.91
 public val Er-2116 = 4.16
 
@@ -16,7 +16,7 @@ public val Er-2116 = 4.16
 ;    https://github.com/JITx-Inc/jlc-pcb/issues/8
 ; I'm using an average value for each of the materials
 public val Dk-7628 = 0.0168 
-public val Dk-3314 = 0.0168 
+public val Dk-3313 = 0.0168 
 public val Dk-1080 = 0.0178 
 public val Dk-2116 = 0.0168 
 
@@ -26,10 +26,10 @@ public val FR4-7628-Material = DielectricMaterial(
   loss-tangent = Dk-7628 ; @ 1GHz
 )
 
-public val FR4-3314-Material = DielectricMaterial(
-  description = "FR4 Prepreg 3314 - JLC PCB Specified"
-  dielectric-coefficient = Er-3314 ; @ 1GHz
-  loss-tangent = Dk-3314 ; @ 1GHz
+public val FR4-3313-Material = DielectricMaterial(
+  description = "FR4 Prepreg 3313 - JLC PCB Specified"
+  dielectric-coefficient = Er-3313 ; @ 1GHz
+  loss-tangent = Dk-3313 ; @ 1GHz
 )
 
 public val FR4-1080-Material = DielectricMaterial(
@@ -59,4 +59,3 @@ public val FR4-Core-Material = DielectricMaterial(
   dielectric-coefficient = Er-core ; @ 1GHz
   loss-tangent = Dk-core ; @ 1GHz
 )
-
