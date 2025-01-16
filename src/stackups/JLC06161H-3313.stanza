@@ -21,7 +21,7 @@ public val stackup-gen = make-layer-stack("JLC06161H-3313", outers) where:
   val outers = [
   [cu-1oz, prepreg-3313x1],
   [cu-halfoz, core]
-  [cu-halfoz, FR4(0.0152, name = "2116x1")]
+  [cu-halfoz, prepreg-2116x1]
   ]
 
 
@@ -35,39 +35,30 @@ val int-velocity = phase-velocity((Er-3313 + Er-core) / 2.0)
 public pcb-routing-structure se-50 (neckdown:Maybe<NeckDown> = None()):
   name = "50Ω Single-Ended - CPWG - JLC06161H-3313"
 
-  ; This expects a ground ref plane on Top + 1
+  ; This expects a ground ref plane on Top + 1 and Bottom - 1
   val ext-se-50-ustrip = RoutingStructureLayerConstraints(
     trace-width = 0.1565,
     clearance = 0.5,
     velocity = ext-velocity
-    insertion-loss = Dk-prepreg
+    insertion-loss = Dk-3313
     neck-down = value-or-else(neckdown, {false})
   )
 
-; This expects a ground ref plane on Top+1 and Top + 3
-  val l2_5-se-50-stripline = RoutingStructureLayerConstraints(
+; This expects a ground ref plane on Top+2 and Top+3
+  val l3_4-se-50-stripline = RoutingStructureLayerConstraints(
     trace-width = 0.1318,
     clearance = 0.3,
     velocity = int-velocity
-    insertion-loss = Dk-prepreg
+    insertion-loss = Dk-2116
     neck-down = value-or-else(neckdown, {false})
   )
 
-  ; This expects a ground ref plane on Top+1 and Top + 3
-  val l3_4-se-50-stripline = RoutingStructureLayerConstraints(
+  ; This expects a ground ref plane on Top+2 and Bottom - 1
+  val l2_5-se-50-stripline = RoutingStructureLayerConstraints(
     trace-width = 0.1425,
     clearance = 0.3,
     velocity = int-velocity
-    insertion-loss = Dk-prepreg
-    neck-down = value-or-else(neckdown, {false})
-  )
-
-  ; This expects a ground ref plane on Top+1 and Top + 3
-  val l4-se-50-stripline = RoutingStructureLayerConstraints(
-    trace-width = 0.1425,
-    clearance = 0.3,
-    velocity = int-velocity
-    insertion-loss = Dk-prepreg
+    insertion-loss = Dk-3313
     neck-down = value-or-else(neckdown, {false})
   )
 
@@ -83,13 +74,13 @@ public pcb-routing-structure uncoupled-diff-100-def:
     trace-width = 0.1080,
     clearance = 0.15,
     velocity = ext-velocity
-    insertion-loss = Dk-prepreg
+    insertion-loss = Dk-3313
   )
   val df-100-stripline = RoutingStructureLayerConstraints(
     trace-width = 0.1029,
     clearance = 0.15,
     velocity = int-velocity
-    insertion-loss = Dk-prepreg
+    insertion-loss = Dk-3313
   )
 
   layer-constraints(Top) = df-100-ustrip
@@ -133,6 +124,28 @@ public pcb-differential-routing-structure diff-100 (
   layer-constraints(Top + 3) = df-100-stripline
   layer-constraints(Bottom - 1) = df-100-stripline
 
+
+public pcb-routing-structure uncoupled-diff-85-def:
+  val df-85-ustrip = RoutingStructureLayerConstraints(
+    trace-width = 0.1080,
+    clearance = 0.15,
+    velocity = ext-velocity
+    insertion-loss = Dk-3313
+  )
+  val df-85-stripline = RoutingStructureLayerConstraints(
+    trace-width = 0.1029,
+    clearance = 0.15,
+    velocity = int-velocity
+    insertion-loss = Dk-3313
+  )
+
+  layer-constraints(Top) = df-85-ustrip
+  layer-constraints(Bottom) = df-85-ustrip
+
+  layer-constraints(Top + 1) = df-85-stripline
+  layer-constraints(Top + 3) = df-85-stripline
+  layer-constraints(Bottom - 1) = df-85-stripline
+
 public pcb-differential-routing-structure diff-85 (
   uncoupled:Maybe<RoutingStructure> = None()
   neckdown:Maybe<DifferentialNeckDown> = None()
@@ -147,26 +160,36 @@ public pcb-differential-routing-structure diff-85 (
     pair-spacing = 0.15
     clearance = 0.3
     velocity = ext-velocity
-    insertion-loss = Dk-prepreg
+    insertion-loss = Dk-3313
     neck-down = value-or-else(neckdown, {false})
   )
 
   layer-constraints(Top) = [df-85-ustrip]
   layer-constraints(Bottom) = [df-85-ustrip]
   
-  ; This expects a ground ref plane on Top and Top + 2 (or Bottom and Bottom - 2)
-  val df-85-stripline = DiffRoutingStructureLayerConstraints(
+  ; This expects a ground ref plane on Top and Top + 1 (or Bottom and Bottom - 1)
+  val df-85-3313-stripline = DiffRoutingStructureLayerConstraints(
     trace-width = 0.1605
     pair-spacing = 0.15
     clearance = 0.3
     velocity = int-velocity
-    insertion-loss = Dk-prepreg
+    insertion-loss = Dk-3313
+    neck-down = value-or-else(neckdown, {false})
+  )
+    
+  ; This expects a ground ref plane on Top and Top + 2 (or Bottom and Bottom - 2)
+  val df-85-2216-stripline = DiffRoutingStructureLayerConstraints(
+    trace-width = 0.1605
+    pair-spacing = 0.15
+    clearance = 0.3
+    velocity = int-velocity
+    insertion-loss = Dk-2116
     neck-down = value-or-else(neckdown, {false})
   )
 
-  layer-constraints(Top + 1) = [df-85-stripline]
-  layer-constraints(Top + 3) = [df-85-stripline]
-  layer-constraints(Bottom - 1) = [df-85-stripline]
+  layer-constraints(Top + 1) = [df-85-3313-stripline]
+  layer-constraints(Top + 3) = [df-85-2216-stripline]
+  layer-constraints(Bottom - 1) = [df-85-3313-stripline]
 
 
 public defn JLC06161H-3313 (vias:Tuple<Via> = JLC-VIA-DEFAULTS) -> Substrate :
