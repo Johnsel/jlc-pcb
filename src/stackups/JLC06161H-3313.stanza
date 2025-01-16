@@ -104,7 +104,7 @@ public pcb-differential-routing-structure diff-100 (
     pair-spacing = 0.2
     clearance = 0.3
     velocity = ext-velocity
-    insertion-loss = Dk-prepreg
+    insertion-loss = Dk-3313
     neck-down = value-or-else(neckdown, {false})
   )
   layer-constraints(Top) = df-100-ustrip
@@ -116,7 +116,7 @@ public pcb-differential-routing-structure diff-100 (
     pair-spacing = 0.2
     clearance = 0.3
     velocity = int-velocity
-    insertion-loss = Dk-prepreg
+    insertion-loss = Dk-3313
     neck-down = value-or-else(neckdown, {false})
   )
 
