@@ -164,8 +164,8 @@ public pcb-differential-routing-structure diff-85 (
     neck-down = value-or-else(neckdown, {false})
   )
 
-  layer-constraints(Top) = [df-85-ustrip]
-  layer-constraints(Bottom) = [df-85-ustrip]
+  layer-constraints(Top) = df-85-ustrip
+  layer-constraints(Bottom) = df-85-ustrip
   
   ; This expects a ground ref plane on Top and Top + 1 (or Bottom and Bottom - 1)
   val df-85-3313-stripline = DiffRoutingStructureLayerConstraints(
@@ -187,9 +187,9 @@ public pcb-differential-routing-structure diff-85 (
     neck-down = value-or-else(neckdown, {false})
   )
 
-  layer-constraints(Top + 1) = [df-85-3313-stripline]
-  layer-constraints(Top + 3) = [df-85-2216-stripline]
-  layer-constraints(Bottom - 1) = [df-85-3313-stripline]
+  layer-constraints(Top + 1) = df-85-3313-stripline
+  layer-constraints(Top + 3) = df-85-2216-stripline
+  layer-constraints(Bottom - 1) = df-85-3313-stripline
 
 
 public defn JLC06161H-3313 (vias:Tuple<Via> = JLC-VIA-DEFAULTS) -> Substrate :
