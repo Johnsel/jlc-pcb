@@ -68,8 +68,8 @@ public pcb-routing-structure uncoupled-diff-100-def:
     insertion-loss = Dk-3313
   )
   val df-100-stripline = RoutingStructureLayerConstraints(
-    trace-width = 0,0508,
-    clearance = 0,1016,
+    trace-width = 0.0508,
+    clearance = 0.1016,
     velocity = int-velocity
     insertion-loss = Dk-3313
   )
