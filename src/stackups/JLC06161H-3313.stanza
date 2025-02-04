@@ -255,8 +255,8 @@ public pcb-differential-routing-structure diff-85 (
   ; This expects a ground ref plane on Top + 1
   val df-85-ustrip = DiffRoutingStructureLayerConstraints(
     trace-width = 0.1179
-    pair-spacing = 0.2032
-    clearance = 0.2032
+    pair-spacing = 0.1016
+    clearance = 0.1016
     velocity = ext-velocity
     insertion-loss = Dk-3313
     neck-down = value-or-else(neckdown, {false})
@@ -264,8 +264,8 @@ public pcb-differential-routing-structure diff-85 (
 
   val df-85-2-5-stripline = DiffRoutingStructureLayerConstraints(
     trace-width = 0.1082
-    pair-spacing = 0.2032
-    clearance = 0.2032
+    pair-spacing = 0.1016
+    clearance = 0.1016
     velocity = int-velocity
     insertion-loss = Dk-3313
     neck-down = value-or-else(neckdown, {false})
