@@ -43,8 +43,9 @@ public pcb-routing-structure se-50 (neckdown:Maybe<NeckDown> = None()):
     velocity = ext-velocity
     insertion-loss = Dk-3313
     neck-down = value-or-else(neckdown, {false})
- 0
-; This expects a ground ref plane on -1 and +1
+  )
+
+  ; This expects a ground ref plane on -1 and +1
   val l2_5-se-50-stripline = RoutingStructureLayerConstraints(
     trace-width = 0.1082
     clearance = 0.1016
@@ -53,7 +54,7 @@ public pcb-routing-structure se-50 (neckdown:Maybe<NeckDown> = None()):
     neck-down = value-or-else(neckdown, {false})
   )
 
-; This expects a ground ref plane on -1 and +1
+  ; This expects a ground ref plane on -1 and +1
   val l3_4-se-50-stripline = RoutingStructureLayerConstraints(
     trace-width = 0.1143
     clearance = 0.1016
@@ -71,7 +72,7 @@ public pcb-routing-structure se-50 (neckdown:Maybe<NeckDown> = None()):
 
 public pcb-routing-structure uncoupled-diff-100-def:
   val df-100-ustrip = RoutingStructureLayerConstraints(
-    trace-width = 0.0.1080
+    trace-width = 0.1080
     clearance = 0.15
     velocity = ext-velocity
     insertion-loss = Dk-3313
