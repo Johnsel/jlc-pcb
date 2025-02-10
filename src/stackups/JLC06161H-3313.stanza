@@ -293,7 +293,7 @@ public defn JLC06161H-3313 (vias:Tuple<Via> = JLC-VIA-DEFAULTS) -> Substrate :
   Substrate(
     stackup = stackup-gen,
     vias = [
-      std-via-preferred, tented-filled-std-via
+      tented-filled-300umm-via, std-via-preferred, tented-filled-std-via
     ],
     single-ended = [
       50 => se-50,

@@ -136,6 +136,26 @@ public pcb-via tented-filled-std-via:
   filled = true
   via-in-pad = true
 
+
+doc: \<DOC>
+Standard Tented and Filled Via
+
+This via is suitable for via-in-pad applications
+and use the preferred +0.15mm for the pad
+diameter which JLC-PCB recommends.
+<DOC>
+public pcb-via tented-filled-300umm-via:
+  name = "Tented/Filled 300umm Via"
+  description = "Max Hole Diameter is 0.3mm"
+  start = Top
+  stop = Bottom
+  diameter = 0.3
+  hole-diameter = 0.2
+  type = MechanicalDrill
+  tented = true
+  filled = true
+  via-in-pad = true
+
 doc: \<DOC>
 Minimal Default Via Set for JLC-PCB boards
 
