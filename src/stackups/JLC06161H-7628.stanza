@@ -58,6 +58,60 @@ public pcb-routing-structure se-50 (neckdown:Maybe<NeckDown> = None()):
   layer-constraints(Bottom - 1) = int-se-50-stripline
 
 
+public pcb-routing-structure uncoupled-diff-85-def:
+  val df-85-ustrip = RoutingStructureLayerConstraints(
+    trace-width = 0.15,
+    clearance = 0.15,
+    velocity = ext-velocity
+    insertion-loss = Dk-7628
+  )
+  val df-85-stripline = RoutingStructureLayerConstraints(
+    trace-width = 0.1,
+    clearance = 0.15,
+    velocity = int-velocity
+    insertion-loss = Dk-7628
+  )
+
+  layer-constraints(Top) = df-85-ustrip
+  layer-constraints(Bottom) = df-85-ustrip
+
+  layer-constraints(Top + 1) = df-85-stripline
+  layer-constraints(Bottom - 1) = df-85-stripline
+
+public pcb-differential-routing-structure diff-85 (
+  uncoupled:Maybe<RoutingStructure> = None()
+  neckdown:Maybe<DifferentialNeckDown> = None()
+  ):
+  name = "85Ω Differential Pair - CPWG - JLC06161H-7628"
+
+  make-uncoupled-region(uncoupled-diff-85-def, uncoupled)
+
+  ; This expects a ground ref plane on Top + 1
+  val df-85-ustrip = DiffRoutingStructureLayerConstraints(
+    trace-width = 0.15
+    pair-spacing = 0.15
+    clearance = 0.3
+    velocity = ext-velocity
+    insertion-loss = Dk-7628
+    neck-down = value-or-else(neckdown, {false})
+  )
+  layer-constraints(Top) = df-85-ustrip
+  layer-constraints(Bottom) = df-85-ustrip
+
+  ; This expects a ground ref plane on Top and Top + 2 (or Bottom and Bottom - 2)
+  val df-85-stripline = DiffRoutingStructureLayerConstraints(
+    trace-width = 0.1
+    pair-spacing = 0.15
+    clearance = 0.3
+    velocity = int-velocity
+    insertion-loss = Dk-7628
+    neck-down = value-or-else(neckdown, {false})
+  )
+
+  layer-constraints(Top + 1) = df-85-stripline
+  layer-constraints(Bottom - 1) = df-85-stripline
+
+
 public pcb-routing-structure uncoupled-diff-100-def:
   val df-100-ustrip = RoutingStructureLayerConstraints(
     trace-width = 0.1722,
@@ -115,12 +169,13 @@ public defn JLC06161H-7628 (vias:Tuple<Via> = JLC-VIA-DEFAULTS) -> Substrate :
   Substrate(
     stackup = stackup-gen,
     vias = [
-      std-via-preferred, tented-filled-std-via
+      std-via-preferred, tented-filled-std-via, multi-vip-cost+3-preferred
     ],
     single-ended = [
       50 => se-50,
     ]
     differential = [
+      85 => diff-85,
       100 => diff-100,
     ]
   )
